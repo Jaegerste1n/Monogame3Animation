@@ -13,6 +13,13 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin tribble_coo.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.5.1
+/build:tribble_coo.wav
+
 #begin tribbleBrown.png
 /importer:TextureImporter
 /processor:TextureProcessor
