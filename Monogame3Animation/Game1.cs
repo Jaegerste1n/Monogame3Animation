@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -14,6 +15,7 @@ namespace Monogame3Animation
         Rectangle tribbleGreyRect, tribbleCreamRect, tribbleOrangeRect, tribbleBrownRect;
         Vector2 tribbleGreySpeed, tribbleCreamSpeed, tribbleOrangeSpeed, tribbleBrownSpeed;
         SoundEffect tribbleCoo;
+        Random generator = new Random();
 
         public Game1()
         {
@@ -28,14 +30,16 @@ namespace Monogame3Animation
             window = new Rectangle(0, 0, 800, 600);
             _graphics.PreferredBackBufferWidth = window.Width;
             _graphics.PreferredBackBufferHeight = window.Height;
-            tribbleGreyRect = new Rectangle(300, 10, 100, 100);
-            tribbleGreySpeed = new Vector2(50, 50);
-            tribbleOrangeRect = new Rectangle(300, 10, 100, 100);
+            _graphics.ApplyChanges();
+            tribbleGreyRect = new Rectangle(generator.Next(0,500), generator.Next(0,500), 100, 100);
+            tribbleGreySpeed = new Vector2(70, 70);
+            tribbleOrangeRect = new Rectangle(generator.Next(0, 500), generator.Next(0, 500), 100, 100);
             tribbleOrangeSpeed = new Vector2(0, 2);
-            tribbleCreamRect = new Rectangle(200, 50, 100, 100);
-            tribbleCreamSpeed = new Vector2(70, 0);
-            tribbleBrownRect = new Rectangle(300, 10, 100, 100);
-            tribbleBrownSpeed = new Vector2(45, 15);
+            tribbleCreamRect = new Rectangle(generator.Next(0, 500), generator.Next(0, 500), 100, 100);
+            tribbleCreamSpeed = new Vector2(90, 0);
+            tribbleBrownRect = new Rectangle(generator.Next(0, 500), generator.Next(0, 500), 100, 100);
+            tribbleBrownSpeed = new Vector2(60, 30);
+            
 
 
 
@@ -70,12 +74,12 @@ namespace Monogame3Animation
             tribbleBrownRect.Y += (int)tribbleBrownSpeed.Y;
             if (tribbleGreyRect.Right > window.Width || tribbleGreyRect.Left < 0)
             {
-                tribbleGreySpeed.X *= -1;
+                tribbleGreyRect.X = -1;
                 tribbleCoo.Play();
             }
             if (tribbleGreyRect.Bottom > window.Height || tribbleGreyRect.Top < 0)
             {
-                tribbleGreySpeed.Y *= -1;
+                tribbleGreyRect.Y = -1;
             }
             if (tribbleCreamRect.Right > window.Width || tribbleCreamRect.Left < 0)
             {
@@ -88,12 +92,14 @@ namespace Monogame3Animation
             }
             if (tribbleOrangeRect.Right > window.Width || tribbleOrangeRect.Left < 0)
             {
-                tribbleOrangeSpeed.X *= -1;
+                tribbleOrangeRect.X = generator.Next(0, 200);
+                tribbleOrangeRect.Y = -generator.Next(0, 200);
                 tribbleCoo.Play();
             }
             if (tribbleOrangeRect.Bottom > window.Height || tribbleOrangeRect.Top < 0)
             {
-                tribbleOrangeSpeed.Y *= -1;
+                tribbleOrangeRect.Y = -generator.Next(0, 200);
+                tribbleOrangeRect.X = generator.Next(0, 200);
             }
             if (tribbleBrownRect.Right > window.Width || tribbleBrownRect.Left < 0)
             {
